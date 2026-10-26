@@ -800,6 +800,35 @@ ol {
   opacity: 1;
 }
 
+.scene__reveal {
+  position: absolute;
+  inset: 0;
+}
+
+/* Revelação: a foto começa escura e desfocada e "entra em foco" ao carregar. */
+.scene--reveal .scene__reveal {
+  opacity: 0;
+}
+
+.scene--reveal.is-ready .scene__reveal {
+  animation: photo-reveal 2.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Variante final: foto em destaque, escurecendo só onde fica o card. */
+.scene--final .scene__photo {
+  object-position: 30% 30%;
+}
+
+.scene--final .scene__scrim {
+  background:
+    linear-gradient(90deg, rgba(10, 3, 30, 0.6) 0%, rgba(10, 3, 30, 0.3) 26%, transparent 42%),
+    linear-gradient(180deg, rgba(5, 2, 15, 0.35) 0%, transparent 18%, transparent 72%, rgba(5, 2, 15, 0.7) 100%);
+}
+
+.scene--final .scene__vignette {
+  background: radial-gradient(ellipse 130% 110% at 55% 45%, transparent 60%, rgba(3, 1, 10, 0.5));
+}
+
 /* Recorte vertical (celular): desloca o enquadramento para o sol entrar inteiro. */
 @media (max-width: 700px), (max-aspect-ratio: 4/5) {
   .scene__photo {
@@ -841,6 +870,10 @@ ol {
   background:
     linear-gradient(180deg, rgba(122, 60, 255, 0.4), rgba(255, 45, 149, 0.45) 70%, rgba(255, 138, 61, 0.5));
   box-shadow: var(--glow-pink), inset 0 0 40px rgba(0, 0, 0, 0.35);
+}
+
+.character__portrait picture {
+  display: contents;
 }
 
 .character__image {
@@ -1444,39 +1477,80 @@ ol {
   margin-top: var(--space-2);
 }
 
-/* Etapa 4 — Final */
+/* Etapa 4 — Final: foto em destaque + mensagem em card de vidro roxo */
+.app:has(.final) {
+  max-width: none;
+  padding-inline: clamp(1rem, 5vw, 5rem);
+}
+
 .final {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-4) 0 var(--space-2);
-  text-align: center;
+  width: 100%;
 }
 
-.final__stamp {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 7vw, 3.5rem);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #ffd27a;
-  text-shadow:
-    0 0 14px rgba(255, 138, 61, 0.7),
-    0 0 40px rgba(255, 45, 149, 0.45);
+.final__card {
+  position: relative;
+  width: min(30vw, 460px);
+  min-width: 340px;
+  padding: var(--space-4);
+  background: linear-gradient(160deg, rgba(96, 40, 170, 0.5), rgba(34, 10, 74, 0.64));
+  border: 1px solid rgba(196, 150, 255, 0.38);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: 0 24px 70px rgba(10, 0, 30, 0.55), inset 0 0 40px rgba(150, 90, 255, 0.12);
 }
 
-.final__line {
-  width: min(280px, 60%);
+/* Fio de neon no topo do card, igual ao das outras etapas */
+.final__card::before {
+  content: '';
+  position: absolute;
+  inset: 0 var(--space-4) auto;
   height: 2px;
   background: var(--gradient-neon);
   box-shadow: var(--glow-pink);
   border-radius: 2px;
 }
 
+.final__title {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--gradient-sunset);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+.final__greeting {
+  margin: var(--space-3) 0 var(--space-2);
+  font-family: var(--font-script);
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  line-height: 1.15;
+  color: #ff8de8;
+  text-shadow: 0 0 14px rgba(255, 60, 210, 0.6);
+}
+
 .final__text {
-  max-width: 32rem;
-  font-size: var(--text-lg);
-  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: #fff;
+}
+
+.final__text--closing {
+  font-weight: 700;
+}
+
+.final__signature {
+  margin: 0;
+  font-family: var(--font-script);
+  font-size: 1.35rem;
+  color: #ffd27a;
 }
 
 /* ---------- 7. Responsividade ---------- */
@@ -1620,6 +1694,38 @@ ol {
   }
 }
 
+/* Etapa final em telas pouco largas: foto no alto, card embaixo (rostos livres) */
+@media (max-aspect-ratio: 3/2), (max-width: 700px) {
+  .app:has(.final) .app__stage {
+    align-items: flex-end;
+    padding-top: 36vh;
+    padding-bottom: var(--space-3);
+  }
+
+  .final__card {
+    width: 100%;
+    max-width: 620px;
+    min-width: 0;
+    margin-inline: auto;
+    padding: var(--space-3);
+  }
+
+  .scene--final .scene__photo {
+    object-position: 50% 0%;
+  }
+
+  .scene--final .scene__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 2, 15, 0.3) 0%,
+      transparent 18%,
+      transparent 34%,
+      rgba(8, 3, 26, 0.55) 58%,
+      rgba(5, 2, 15, 0.85) 100%
+    );
+  }
+}
+
 /* ---------- 8. Movimento ---------- */
 @keyframes rise {
   from {
@@ -1693,6 +1799,19 @@ ol {
   }
   50% {
     filter: drop-shadow(0 0 14px rgba(46, 190, 255, 0.7)) drop-shadow(0 0 34px rgba(255, 45, 149, 0.7));
+  }
+}
+
+@keyframes photo-reveal {
+  from {
+    opacity: 0;
+    filter: blur(18px) brightness(0.25);
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0) brightness(1);
+    transform: scale(1);
   }
 }
 

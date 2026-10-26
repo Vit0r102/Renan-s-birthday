@@ -22,7 +22,7 @@ export const STAGES = [
   },
   {
     id: 'final',
-    title: 'O Proximo Capítulo',
+    title: 'O Próximo Capítulo',
     subtitle: 'Todo grande jogo termina com um novo começo.',
     nextLabel: 'Rever experiência',
   },

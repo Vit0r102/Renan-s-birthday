@@ -1,6 +1,7 @@
 import StageScreen from '../components/StageScreen.jsx'
 import { CHARACTER, STATS, ACHIEVEMENTS } from '../data/character.js'
-import casalNeonImg from '../assets/scene/casal-neon.png'
+import casalNeonAvif from '../assets/scene/casal-neon.avif'
+import casalNeonWebp from '../assets/scene/casal-neon.webp'
 
 // Garante que a barra nunca passe dos limites de 0 a 100.
 const clampPercent = (value) => Math.min(100, Math.max(0, value))
@@ -13,7 +14,17 @@ function CharacterStage({ meta }) {
         <div className="character__top">
           <figure className="character__figure">
             <div className="character__portrait">
-              <img src={casalNeonImg} alt="Casal Neon em Vice City" className="character__image" />
+              <picture>
+                <source type="image/avif" srcSet={casalNeonAvif} />
+                <img
+                  src={casalNeonWebp}
+                  alt="Casal Neon em Vice City"
+                  className="character__image"
+                  width="640"
+                  height="960"
+                  decoding="async"
+                />
+              </picture>
             </div>
             <figcaption className="character__caption">
               Protagonistas de Vice City
