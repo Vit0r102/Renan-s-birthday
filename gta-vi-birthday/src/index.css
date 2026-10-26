@@ -279,7 +279,7 @@ ol {
 /* Botões */
 .btn {
   position: relative;
-  overflow: visible;
+  overflow: clip;
   min-height: 48px;
   padding: 0 var(--space-4);
   font: inherit;
