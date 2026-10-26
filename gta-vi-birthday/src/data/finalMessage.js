@@ -4,10 +4,11 @@ export const FINAL_MESSAGE = {
   badge: 'Missão cumprida',
   greeting: 'Feliz aniversário, Renan!',
   paragraphs: [
-    'Mais um ano de decisões questionáveis, planos infalíveis que ninguém testou e caminhos desnecessariamente complicados. E você segue em frente com a confiança de quem tem certeza de que vai dar certo.',
-    'Brincadeiras à parte: é muito bom ter você por perto. Obrigado pela amizade, pelas risadas e por estar sempre ali, dentro e fora do jogo.',
+    'Mais um ano de vida desbloqueado cara , novas missões de vida e novos objetivos com metas a serem alcançadas primo.',
+    'Meu mano, te desejo tudo de melhor nessa nova fase. Que não faltem saúde, felicidade, conquistas e motivos pra sorrir. Que tu consiga realizar teus sonhos, aproveitar as oportunidades que aparecerem e construir uma história da qual tenha orgulho.',
+    'Preparei esse pequeno projeto pra ti porque nossa amizade merece mais do que um simples “feliz aniversário” enviado no WhatsApp. Queria fazer algo diferente, então eu fiz',
   ],
-  closing: 'Que o próximo capítulo seja ainda melhor. E que, pelo menos dessa vez, o plano funcione.',
-  signature: 'Com carinho,',
-  sender: '',
+  closing: 'Que o próximo capítulo seja ainda melhor.',
+  signature: 'Do seu primo programador,',
+  sender: 'Vitor',
 }
