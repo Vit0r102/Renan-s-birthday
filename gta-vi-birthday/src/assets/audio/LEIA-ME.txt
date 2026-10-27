@@ -1,0 +1,24 @@
+MÚSICA DO SITE
+==============
+
+1. Coloque UM arquivo de música nesta pasta (src/assets/audio/).
+   O nome pode ser qualquer um, por exemplo: trilha.mp3
+   Formatos aceitos: mp3 (recomendado), ogg, m4a, aac, wav, webm.
+
+2. Pronto: não precisa mexer em nenhum código.
+   - A música começa quando a pessoa clica em "Iniciar".
+   - Fica em loop, com o volume subindo devagar (fade-in).
+   - Aparece um botão redondo no canto para ligar/desligar.
+   - Se esta pasta ficar sem arquivo, o site funciona normalmente, sem música.
+
+3. Dicas para o site continuar rápido:
+   - Prefira arquivos de até 2 a 3 MB (cerca de 2 a 3 minutos em 128 kbps).
+   - Para reduzir um mp3 pesado (precisa do ffmpeg instalado):
+       ffmpeg -i original.mp3 -b:a 128k -ac 2 trilha.mp3
+   - Se colocar mais de um arquivo, vale o primeiro em ordem alfabética.
+
+4. Ajustes (volume, tempo do fade): src/audio/musicConfig.js
+
+5. Direitos autorais: músicas comerciais (inclusive trilhas de GTA) têm
+   direitos reservados. Como o site fica público no Vercel, prefira uma
+   faixa livre de direitos ou uma que você tenha autorização para usar.

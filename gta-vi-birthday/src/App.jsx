@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { STAGES } from './data/stages.js'
 import Backdrop from './components/Backdrop.jsx'
 import StageNav from './components/StageNav.jsx'
+import MusicToggle from './components/MusicToggle.jsx'
+import { useBackgroundMusic } from './audio/useBackgroundMusic.js'
 import WelcomeStage from './stages/WelcomeStage.jsx'
 import CharacterStage from './stages/CharacterStage.jsx'
 import QuizStage from './stages/QuizStage.jsx'
@@ -17,6 +19,7 @@ const STAGE_COMPONENTS = {
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const music = useBackgroundMusic()
 
   // Ao trocar de etapa, volta para o topo (útil no celular).
   useEffect(() => {
@@ -30,12 +33,16 @@ function App() {
   const goBack = () => setCurrentIndex((i) => Math.max(i - 1, 0))
 
   // Na última etapa, "avançar" reinicia a experiência.
-  const goNext = () =>
+  const goNext = () => {
+    // O clique em "Iniciar" é o gesto do usuário que libera o áudio no navegador.
+    if (currentIndex === 0) music.start()
     setCurrentIndex((i) => (i >= lastIndex ? 0 : i + 1))
+  }
 
   return (
     <>
       <Backdrop />
+      <MusicToggle status={music.status} onToggle={music.toggle} lowered={currentIndex === 0} />
 
       <main className="app">
         {currentIndex > 0 && (

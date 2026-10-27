@@ -279,7 +279,7 @@ ol {
 /* Botões */
 .btn {
   position: relative;
-  overflow: clip;
+  overflow: hidden;
   min-height: 48px;
   padding: 0 var(--space-4);
   font: inherit;
@@ -1551,6 +1551,57 @@ ol {
   font-family: var(--font-script);
   font-size: 1.35rem;
   color: #ffd27a;
+}
+
+/* Botão de música (canto superior direito) */
+.music-toggle {
+  position: fixed;
+  top: max(var(--space-3), env(safe-area-inset-top));
+  right: max(var(--space-3), env(safe-area-inset-right));
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--color-text);
+  background: rgba(10, 5, 30, 0.72);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+  animation: rise 0.6s ease both;
+}
+
+/* Na abertura, desce um pouco para não encostar no rótulo "VICE CITY". */
+.music-toggle--low {
+  top: calc(max(var(--space-3), env(safe-area-inset-top)) + 1.9rem);
+}
+
+.music-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.music-toggle:hover {
+  color: var(--color-cyan);
+  border-color: var(--color-cyan);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-1px);
+}
+
+.music-toggle:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
 }
 
 /* ---------- 7. Responsividade ---------- */
